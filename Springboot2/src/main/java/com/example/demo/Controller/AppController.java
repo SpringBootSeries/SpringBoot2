@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Student;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 @RestController
 @RequestMapping("/app")
@@ -46,6 +48,21 @@ public class AppController {
 		return null;
 	}
 	
+	@GetMapping("age-range")
+	public List<Student> getStudentByAgeRange(){
+		return students.stream().filter(s -> s.getAge() >= 20 && s.getAge()<=23).collect(Collectors.toList());
+    }
+	@GetMapping("/sorted-by-gpa")
+    public List<Student> getSortedByGpa() {
+        return students.stream()
+                .sorted(Comparator.comparingDouble(Student::getGpa).reversed())
+                .collect(Collectors.toList());
+    }
+	
+	
+
+	}
+	
 	
 	
 	
@@ -54,4 +71,4 @@ public class AppController {
 	
 	
 
-}
+
