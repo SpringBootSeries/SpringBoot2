@@ -100,9 +100,9 @@ This project is a simple Spring Boot REST API for managing student records. It a
 
 ![output1](ouput1.png)
 ![output2](ouput2.png)
-![output3](output3.png)
-![output4](output4.png)
-![output5](output5.png)
+![outpu3](output3.jpg)
+![output4](ouput4.png)
+![output5](output5.jpg)
 
 
 
