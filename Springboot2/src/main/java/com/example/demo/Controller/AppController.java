@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.Student;
+import java.util.List;
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/app")
 
@@ -21,10 +25,30 @@ public class AppController {
 	}
 	
 	@GetMapping("/student")
-	public String getStudent() {
+	public Student getStudent() {
 		return Bob;
 		
 	}
+	
+	@GetMapping("/students")
+	public  List<Student> getStudents() {
+		return students;
+		
+	}
+	
+	@GetMapping("/student/{id}")
+	public Student getStudent(@PathVariable("id") String regno) {
+		for (Student student : students) {
+			if(student.getRegNo().equals(regno)) {
+				return student;
+			}
+		}
+		return null;
+	}
+	
+	
+	
+	
 	
 	
 	
