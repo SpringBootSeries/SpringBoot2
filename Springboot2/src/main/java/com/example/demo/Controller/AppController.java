@@ -97,13 +97,12 @@ public class AppController {
         return "Student not found!";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteStudent(@PathVariable("id") String regNo) {
         return students.removeIf(student -> student.getRegNo().equals(regNo)) 
-                ? "Student deleted successfully!":"Student not found"             
-    }}
-
-	
+                ? "Student deleted successfully!"
+                : "Student not found!";
+    }}
 	
 	
 	
