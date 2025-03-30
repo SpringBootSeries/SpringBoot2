@@ -52,14 +52,14 @@ public class AppController {
 	public List<Student> getStudentByAgeRange(){
 		return students.stream().filter(s -> s.getAge() >= 20 && s.getAge()<=23).collect(Collectors.toList());
     }
+	
 	@GetMapping("/sorted-by-gpa")
     public List<Student> getSortedByGpa() {
         return students.stream()
                 .sorted(Comparator.comparingDouble(Student::getGpa).reversed())
                 .collect(Collectors.toList());
     }
-	
-	
+
 
 	}
 	
