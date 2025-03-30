@@ -1,7 +1,11 @@
 package com.example.demo.Controller;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,8 +64,45 @@ public class AppController {
                 .collect(Collectors.toList());
     }
 
+	@GetMapping
+    public List<Student> getAllStudents() {
+        return students;
+    }
 
-	}
+    
+    @GetMapping("/{id}")
+    public Student getStudentById(@PathVariable("id") String regNo) {
+        return students.stream()
+                .filter(s -> s.getRegNo().equals(regNo))
+                .findFirst()
+                .orElse(null);
+    }
+
+   
+    @PostMapping
+    public String addStudent(@RequestBody Student student) {
+        students.add(student);
+        return "Student added successfully!";
+    }
+    @PutMapping("/{id}")
+    public String updateStudent(@PathVariable("id") String regNo, @RequestBody Student updatedStudent) {
+        for (Student student : students) {
+            if (student.getRegNo().equals(regNo)) {
+                student.setName(updatedStudent.getName());
+                student.setAge(updatedStudent.getAge());
+                student.setGpa(updatedStudent.getGpa());
+                return "Student updated successfully!";
+            }
+        }
+        return "Student not found!";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteStudent(@PathVariable("id") String regNo) {
+        return students.removeIf(student -> student.getRegNo().equals(regNo)) 
+                ? "Student deleted successfully!":"Student not found"             
+    }}
+
 	
 	
 	
